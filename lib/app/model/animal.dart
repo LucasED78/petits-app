@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:petits_app/model/breed.dart';
+import 'package:flutter/material.dart';
+import 'package:petits_app/app/model/breed.dart';
 
 class Animal {
   int id;

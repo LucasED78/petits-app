@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:petits_app/core/petits_scaffold.dart';
 import 'package:petits_app/core/petits_theme.dart';
+import 'package:petits_app/core/security/keys.dart';
+import 'package:petits_app/model/animal.dart';
+import 'package:petits_app/services/animal_service.dart';
 
-void main() => runApp(PetitsApp());
+void main() {
+  final Keys _keys = Keys();
+  _keys.init();
+
+  runApp(PetitsApp());
+}
 
 class PetitsApp extends StatelessWidget {
   @override

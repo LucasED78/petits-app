@@ -11,9 +11,13 @@ class SecurityStorage {
     return await _flutterSecureStorage.read(key: key);
   }
 
+  Future<Map<String, String>> readAll() async{
+    return await _flutterSecureStorage.readAll();
+  }
+
   void setInitialConfig(Map<String, String> configKeys) {
     return configKeys.forEach((k, v) async{
-      if (await readKey(k) != null) await writeKey(k, v);
+      if (await readKey(k) != "") await writeKey(k, v);
     });
   }
 }

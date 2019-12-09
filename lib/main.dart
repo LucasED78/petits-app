@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petits_app/app/providers/animal_provider.dart';
+import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_screen.dart';
 import 'package:petits_app/core/petits_scaffold.dart';
 import 'package:petits_app/core/petits_theme.dart';
@@ -21,6 +22,9 @@ class PetitsApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: AnimalProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: LoadingProvider(),
         )
       ],
       child: MaterialApp(

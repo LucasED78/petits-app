@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:petits_app/app/providers/loading_provider.dart';
+import 'package:petits_app/core/widgets/loading.dart';
+import 'package:provider/provider.dart';
 
 class PetitsScaffold extends StatelessWidget {
 
@@ -9,7 +12,7 @@ class PetitsScaffold extends StatelessWidget {
   final bool drawer;
 
   PetitsScaffold({
-    @required this.title,
+    this.title = "",
     @required this.body,
     this.actions,
     this.floatingActionButton,
@@ -37,7 +40,7 @@ class PetitsScaffold extends StatelessWidget {
           actions: actions != null ? actions : [],
         ),
         backgroundColor: Colors.transparent,
-        body: Center(
+        body: Provider.of<LoadingProvider>(context).loading ? Loading() : Center(
           child: Card(
             elevation: 5,
             margin: EdgeInsets.symmetric(vertical: 0),

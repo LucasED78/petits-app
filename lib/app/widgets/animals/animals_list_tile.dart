@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:petits_app/app/model/animal.dart';
+import 'package:petits_app/app/widgets/animals/animals_details_screen.dart';
 
 class AnimalsListTile extends StatelessWidget {
 
@@ -24,6 +25,9 @@ class AnimalsListTile extends StatelessWidget {
           ),
         ),
         title: Text(_animal.name ?? "Puppy"),
+        onTap: (){
+          Navigator.of(context).pushNamed(AnimalsDetailsScreen.routeName, arguments: _animal.id);
+        },
       ),
     );
   }

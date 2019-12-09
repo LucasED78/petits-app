@@ -8,33 +8,33 @@ abstract class HttpApi {
     return await getMethod(path, method, data, options);
   }
 
-  get({ @required String path, Options options}) {
-    return _get(path: path, options: options);
+  get({ @required String path, Options options}) async{
+    return await _get(path: path, options: options);
   }
 
-  delete({ @required String path, Options options }) {
-    return _delete(path: path, options: options);
+  delete({ @required String path, Options options }) async{
+    return await _delete(path: path, options: options);
   }
 
    _post({ @required String path, @required dynamic data, Options options }) async{
     return await Dio().post(path, data: data, options: options);
   }
 
-  _get({ @required String path, Options options }) {
+  _get({ @required String path, Options options }) async{
     print("$path ${options.headers}");
-    return Dio().get(path, options: options);
+    return await Dio().get(path, options: options);
   }
 
-  _put({ @required String path, @required dynamic data, Options options }) {
-    return Dio().put(path, data: data, options: options);
+  _put({ @required String path, @required dynamic data, Options options }) async{
+    return await Dio().put(path, data: data, options: options);
   }
 
-  _patch({ @required String path, @required dynamic data, Options options }) {
-    return Dio().patch(path, data: data, options:  options);
+  _patch({ @required String path, @required dynamic data, Options options }) async{
+    return await Dio().patch(path, data: data, options:  options);
   }
 
-  _delete({ @required String path, Options options }) {
-    return Dio().delete(path, options: options);
+  _delete({ @required String path, Options options }) async{
+    return await Dio().delete(path, options: options);
   }
 
   Future getMethod(String path, HttpMethod method, dynamic data, Options options) async {

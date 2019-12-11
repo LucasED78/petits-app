@@ -24,6 +24,7 @@ dependencies:
   intl: ^0.15.3
   dio: ^3.0.7
   flutter_secure_storage: ^3.3.1+1
+  flutter_svg: 0.15.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -47,7 +48,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+   - assets/icons/paw.svg
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

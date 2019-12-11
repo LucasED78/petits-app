@@ -3,6 +3,7 @@ import 'package:petits_app/app/providers/animal_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_details_screen.dart';
 import 'package:petits_app/app/widgets/animals/animals_screen.dart';
+import 'package:petits_app/app/widgets/auth/login_screen.dart';
 import 'package:petits_app/core/petits_scaffold.dart';
 import 'package:petits_app/core/petits_theme.dart';
 import 'package:petits_app/core/security/keys.dart';
@@ -30,7 +31,7 @@ class PetitsApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: PetitsTheme.mainTheme,
-        home: AnimalsScreen(),
+        home: LoginScreen(),
         routes: {
           AnimalsDetailsScreen.routeName: (_) => AnimalsDetailsScreen()
         },

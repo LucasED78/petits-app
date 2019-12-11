@@ -15,7 +15,6 @@ class AnimalsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
-    print(_animal.toJSON());
 
     return Container(
       width: deviceSize.width * 0.9,

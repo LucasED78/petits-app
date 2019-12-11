@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petits_app/app/model/address.dart';
 import 'package:petits_app/app/model/breed.dart';
 
 class Animal {
@@ -16,6 +17,7 @@ class Animal {
   List<dynamic> photos;
   String status;
   List<dynamic> tags;
+  Address address;
 
   Animal({
     @required this.id,
@@ -30,7 +32,8 @@ class Animal {
     @required this.description,
     @required this.photos,
     @required this.status,
-    @required this.tags
+    @required this.tags,
+    @required this.address
   });
   
   factory Animal.fromJSON(dynamic data){
@@ -47,7 +50,8 @@ class Animal {
       description: data['description'],
       photos: data['photos'],
       status: data['status'],
-      tags: data['tags']
+      tags: data['tags'],
+      address: Address.fromJSON(data['contact']['address'])
     );
   }
 }

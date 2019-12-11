@@ -4,6 +4,7 @@ import 'package:petits_app/app/model/animal.dart';
 import 'package:petits_app/app/widgets/animals/widgets/animal_card_info.dart';
 import 'package:petits_app/app/widgets/animals/widgets/animal_card_tag.dart';
 import 'package:petits_app/core/widgets/loading.dart';
+import 'package:petits_app/utils/string_util.dart';
 
 class AnimalsCard extends StatelessWidget {
 
@@ -14,12 +15,14 @@ class AnimalsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
+    print(_animal.toJSON());
 
     return Container(
       width: deviceSize.width * 0.9,
       child: Card(
         elevation: 4,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CachedNetworkImage(
               width: deviceSize.width,
@@ -57,6 +60,17 @@ class AnimalsCard extends StatelessWidget {
             if (_animal.tags.isNotEmpty) Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: _buildTags(),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              width: deviceSize.width * 0.5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(Icons.location_on),
+                  Text(StringUtil.buildAddress(_animal.address))
+                ],
+              ),
             )
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petits_app/app/providers/animal_provider.dart';
+import 'package:petits_app/app/providers/auth_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_details_screen.dart';
 import 'package:petits_app/app/widgets/animals/animals_screen.dart';
@@ -22,6 +23,9 @@ class PetitsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(
+          value: AuthProvider(),
+        ),
         ChangeNotifierProvider.value(
           value: AnimalProvider(),
         ),

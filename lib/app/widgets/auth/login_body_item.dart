@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:petits_app/core/widgets/gradient_raised_button.dart';
+import 'package:petits_app/app/model/user.dart';
+import 'package:petits_app/app/providers/auth_provider.dart';
+import 'package:petits_app/app/providers/loading_provider.dart';
+import 'package:petits_app/core/widgets/loading_button.dart';
+import 'package:provider/provider.dart';
 
 class LoginBodyItem extends StatefulWidget {
   @override
@@ -10,6 +14,7 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   FocusNode _passwordFocusNode = FocusNode();
+  User _user = User();
 
   @override
   void dispose() {
@@ -28,31 +33,43 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
         key: _formKey,
         child: Column(
           children: <Widget>[
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                   labelText: "email"
               ),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
-              onSubmitted: (_) => _passwordFocusNode.requestFocus(),
+              onFieldSubmitted: (_) => _passwordFocusNode.requestFocus(),
+              onSaved: (v) => _user.email = v,
             ),
             const SizedBox(height: 10,),
-            TextField(
+            TextFormField(
               obscureText: true,
               decoration: InputDecoration(
                   labelText: "password"
               ),
               textInputAction: TextInputAction.done,
+              onSaved: (v) => _user.password = v,
             ),
             const SizedBox(height: 10,),
-            GradientRaisedButton(
+            LoadingButton(
               width: deviceSize.width * 0.6,
               child: Text("LOGIN", style: Theme.of(context).textTheme.button),
-              onPressed: () => {},
+              onPressed: submit,
             )
           ],
         ),
       ),
     );
+  }
+
+  void submit() async{
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+
+      Provider.of<LoadingProvider>(context).loading = true;
+      await Provider.of<AuthProvider>(context).login(_user);
+      Provider.of<LoadingProvider>(context).loading = false;
+    }
   }
 }

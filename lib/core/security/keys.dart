@@ -5,7 +5,8 @@ import 'package:petits_app/core/security/SecurityStorage.dart';
 class Keys {
   Map<String, String> _keys = {
     "PETFINDER_KEY": CONSTANTS.PETFINDER_KEY,
-    "PETFINDER_SECRET": CONSTANTS.PETFINDER_SECRET
+    "PETFINDER_SECRET": CONSTANTS.PETFINDER_SECRET,
+    "FIREBASE_KEY": CONSTANTS.FIREBASE_KEY
   };
 
   init(){

@@ -7,24 +7,32 @@ class AuthProvider with ChangeNotifier {
   String _token;
   DateTime _tokenExpirationTime;
 
-  get token => _token;
-  
-  get tokenExpirationTime => _tokenExpirationTime;
-  
-  bool get isAuthenticated {
-    if (token != null && tokenExpirationTime != null && tokenExpirationTime.isAfter(DateTime.now())) {
-      return true;
+  get token {
+    if (_token != null && tokenExpirationTime != null && tokenExpirationTime.isAfter(DateTime.now())) {
+      return _token;
     }
 
     return null;
   }
 
+  get tokenExpirationTime => _tokenExpirationTime;
+
+  set user(User user) {
+    _user = user;
+    notifyListeners();
+  }
+
+  User get user => _user;
+  
+  bool get isAuthenticated => token != null;
+
   Future<void> login(User user) async{
     var response = await AuthService().login(user.toJSON());
-    print(response);
-    _user.id = response['localId'];
+    user.id = response['localId'];
+    user.token = response['idToken'];
+    _user = user;
     
-    setData(token: response['token'], tokenExpiration: DateTime.now().add(Duration(seconds: response['expiresIn'])), user: _user);
+    setData(token: response['idToken'], tokenExpiration: DateTime.now().add(Duration(seconds: int.parse(response['expiresIn']))), user: _user);
   }
 
   void setData({ @required String token, @required DateTime tokenExpiration, @required User user }) {

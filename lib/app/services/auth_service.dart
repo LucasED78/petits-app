@@ -8,7 +8,7 @@ class AuthService extends HttpApi {
     print(userdata);
     String key = await SecurityStorage().readKey("FIREBASE_KEY");
 
-    Response response = await this.call("https://identitytoolkit.googleapis.com/v1/accounts:signUpWithPassword?key=$key", HttpMethod.POST, data: {
+    Response response = await this.call("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$key", HttpMethod.POST, data: {
       ...userdata, "returnSecureToken": true
     }).catchError((e) => print(e.response.data));
 

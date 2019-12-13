@@ -54,7 +54,7 @@ class AnimalsCard extends StatelessWidget {
             const SizedBox(height: 10,),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
-              child: Text(_animal.description, textAlign: TextAlign.justify),
+              child: Text(_animal.description ?? "No description available", textAlign: TextAlign.justify),
             ),
             if (_animal.tags.isNotEmpty) Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

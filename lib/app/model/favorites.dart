@@ -1,9 +1,9 @@
-import 'package:petits_app/app/model/animal.dart';
+import 'package:flutter/cupertino.dart';
 
 class Favorites {
-  List<Animal> animals;
+  final int animalId;
 
   Favorites({
-    this.animals
+    @required this.animalId
   });
 }

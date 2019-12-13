@@ -17,4 +17,6 @@ class AnimalProvider with ChangeNotifier {
   Animal getByID(int id) {
     return _animals.firstWhere((a) => a.id == id);
   }
+
+
 }

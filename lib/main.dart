@@ -4,13 +4,10 @@ import 'package:petits_app/app/providers/auth_provider.dart';
 import 'package:petits_app/app/providers/favorites_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_details_screen.dart';
-import 'package:petits_app/app/widgets/animals/animals_list.dart';
 import 'package:petits_app/app/widgets/animals/animals_screen.dart';
 import 'package:petits_app/app/widgets/auth/login_screen.dart';
-import 'package:petits_app/core/petits_scaffold.dart';
 import 'package:petits_app/core/petits_theme.dart';
 import 'package:petits_app/core/security/keys.dart';
-import 'package:petits_app/app/services/animal_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -41,6 +38,7 @@ class PetitsApp extends StatelessWidget {
       child: Consumer<AuthProvider>(
         builder: (ctx, auth, _) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: PetitsTheme.mainTheme,
             home: auth.isAuthenticated ? AnimalsScreen() : LoginScreen(),
             routes: {

@@ -15,6 +15,7 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   FocusNode _passwordFocusNode = FocusNode();
   User _user = User();
+  bool _visibility = false;
 
   @override
   void dispose() {
@@ -44,9 +45,16 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
             ),
             const SizedBox(height: 10,),
             TextFormField(
-              obscureText: true,
+              obscureText: !_visibility,
               decoration: InputDecoration(
-                  labelText: "password"
+                labelText: "password",
+                suffixIcon: IconButton(
+                  icon: IconButton(
+                    icon: Icon(_visibility ? Icons.visibility : Icons.visibility_off),
+                    onPressed: _changeVisibility,
+                  ),
+                  onPressed: (){},
+                )
               ),
               textInputAction: TextInputAction.done,
               onSaved: (v) => _user.password = v,
@@ -55,7 +63,7 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
             LoadingButton(
               width: deviceSize.width * 0.6,
               child: Text("LOGIN", style: Theme.of(context).textTheme.button),
-              onPressed: submit,
+              onPressed: _submit,
             )
           ],
         ),
@@ -63,7 +71,7 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
     );
   }
 
-  void submit() async{
+  void _submit() async{
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
@@ -71,5 +79,11 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
       await Provider.of<AuthProvider>(context).login(_user);
       Provider.of<LoadingProvider>(context).loading = false;
     }
+  }
+
+  void _changeVisibility() {
+    setState(() {
+      _visibility = !_visibility;
+    });
   }
 }

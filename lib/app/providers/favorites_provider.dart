@@ -12,7 +12,6 @@ class FavoritesProvider with ChangeNotifier {
       animalId: animalId
     ));
 
-    var cachedList = _favorites;
     notifyListeners();
 
     try {
@@ -20,7 +19,14 @@ class FavoritesProvider with ChangeNotifier {
           _favorites.map<int>((f) => f.animalId).toList()
       );
     }catch(e){
-      _favorites = cachedList;
+      if (_favorites.length == 1){
+        _favorites = [];
+      }
+      else {
+        has(animalId) ? _favorites.removeWhere((f) => f.animalId == animalId) : _favorites.add(Favorites(
+            animalId: animalId
+        ));
+      }
       notifyListeners();
     }
   }

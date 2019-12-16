@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petits_app/app/model/animal.dart';
 import 'package:petits_app/app/providers/animal_provider.dart';
+import 'package:petits_app/app/providers/favorites_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_list.dart';
 import 'package:petits_app/core/petits_scaffold.dart';
@@ -22,6 +23,7 @@ class _AnimalsScreenState extends State<AnimalsScreen> {
       .then((_) async{
         Provider.of<LoadingProvider>(context).loading = true;
         await Provider.of<AnimalProvider>(context).fetchAnimals();
+        await Provider.of<FavoritesProvider>(context).fetchFavorites();
         Provider.of<LoadingProvider>(context).loading = false;
     });
   }

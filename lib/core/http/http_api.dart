@@ -22,7 +22,6 @@ abstract class HttpApi {
   }
 
   _get({ @required String path, Options options }) async{
-    print("$path ${options.headers}");
     return await Dio().get(path, options: options);
   }
 
@@ -39,6 +38,7 @@ abstract class HttpApi {
   }
 
   Future getMethod(String path, HttpMethod method, dynamic data, Options options) async {
+    print("aaaaaaaaaaaa $path");
     if (method == HttpMethod.POST) return await _post(path: path, data: data, options: options);
     else if (method == HttpMethod.GET) return await _get(path: path, options: options);
     else if (method == HttpMethod.PUT) return await _put(path: path, data: data, options: options);

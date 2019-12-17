@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class AuthProvider with ChangeNotifier {
     _token = token;
     _tokenExpirationTime = tokenExpiration;
 
+    _autoLogout();
     notifyListeners();
   }
 
@@ -66,13 +68,26 @@ class AuthProvider with ChangeNotifier {
     final tokenExp = DateTime.parse(authData['tokenExp']);
     final Map<String, dynamic> userData = json.decode(authData['user']);
 
-    _user = User.fromJSON(userData);
-    _tokenExpirationTime = tokenExp;
-    _token = authData['token'];
-
-    notifyListeners();
+    setData(token: authData['token'], tokenExpiration: tokenExp, user: User.fromJSON(userData));
 
     return isAuthenticated;
+  }
+
+  Timer _autoLogout(){
+    Duration timerMilliseconds = Duration(milliseconds: DateTime.now().difference(_tokenExpirationTime).inMilliseconds.abs());
+
+    return Timer(timerMilliseconds, logout);
+  }
+
+  void logout() async{
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.clear();
+    _token = null;
+    _user = null;
+    notifyListeners();
+
+    _autoLogout().cancel();
   }
   
 }

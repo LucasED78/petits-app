@@ -41,6 +41,7 @@ class PetitsApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (ctx, auth, _) {
+          if (auth.tokenExpirationTime != null) print(Duration(milliseconds: DateTime.now().difference(auth.tokenExpirationTime).inMilliseconds.abs()).inMinutes);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: PetitsTheme.mainTheme,

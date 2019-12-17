@@ -6,26 +6,46 @@ class User {
   static User _instance;
 
   User._({
+    this.id,
     this.email,
-    this.password
+    this.password,
+    this.token
   });
 
   factory User({
+    id,
     email,
-    password
+    password,
+    token
   }) {
     if (_instance == null) _instance = User._(
+      id: id,
       email: email,
-      password: password
+      password: password,
+      token: token
     );
 
     return _instance;
   }
 
+  factory User.fromJSON(dynamic data){
+    return User(
+      id: data['id'],
+      email: data['email'],
+      password: data['password'],
+      token: data['token']
+    );
+  }
+
  Map<String, String> toJSON() {
-   return {
+   Map<String, String> userMap = {
      "email": email,
-     "password": password
+     "password": password,
+     "token": token
    };
+
+   if (id != null) userMap['id'] = id;
+
+   return userMap.cast<String, String>();
  }
 }

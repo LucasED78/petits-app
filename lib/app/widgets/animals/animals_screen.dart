@@ -23,7 +23,7 @@ class _AnimalsScreenState extends State<AnimalsScreen> {
       .then((_) async{
         Provider.of<LoadingProvider>(context).loading = true;
         await Provider.of<AnimalProvider>(context).fetchAnimals();
-        await Provider.of<FavoritesProvider>(context).fetchFavorites();
+//        await Provider.of<FavoritesProvider>(context).fetchFavorites();
         Provider.of<LoadingProvider>(context).loading = false;
     });
   }

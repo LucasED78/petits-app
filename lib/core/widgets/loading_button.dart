@@ -9,16 +9,20 @@ class LoadingButton extends StatelessWidget {
   final Widget child;
   final Function onPressed;
   final double width;
+  final double height;
 
   LoadingButton({
     @required this.child,
     @required this.onPressed,
-    this.width = double.infinity
+    this.width = double.infinity,
+    this.height = 50
   });
 
   @override
   Widget build(BuildContext context) {
     return GradientRaisedButton(
+      width: width,
+      height: height,
       child: Provider.of<LoadingProvider>(context).loading ? Loading() : child,
       onPressed: onPressed,
     );

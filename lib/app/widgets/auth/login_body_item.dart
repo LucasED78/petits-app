@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:petits_app/app/model/user.dart';
 import 'package:petits_app/app/providers/auth_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
+import 'package:petits_app/core/exceptions/FirebaseException.dart';
+import 'package:petits_app/core/widgets/error_dialog.dart';
 import 'package:petits_app/core/widgets/loading_button.dart';
 import 'package:provider/provider.dart';
 
@@ -59,9 +61,10 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
               textInputAction: TextInputAction.done,
               onSaved: (v) => _user.password = v,
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 20,),
             LoadingButton(
-              width: deviceSize.width * 0.6,
+              height: 60,
+              width: deviceSize.width * 0.7,
               child: Text("LOGIN", style: Theme.of(context).textTheme.button),
               onPressed: _submit,
             )
@@ -76,7 +79,22 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
       _formKey.currentState.save();
 
       Provider.of<LoadingProvider>(context).loading = true;
-      await Provider.of<AuthProvider>(context).login(_user);
+      try{
+        await Provider.of<AuthProvider>(context).login(_user);
+      }on FirebaseException catch(e){
+        showDialog(
+          context: context,
+          builder: (_) => ErrorDialog(
+            content: e.toString(),
+            onConfirm: () => Navigator.of(context).pop(),
+            onTryAgain: (){
+              Navigator.of(context).pop();
+              _submit();
+            }
+          )
+        );
+      }
+
       Provider.of<LoadingProvider>(context).loading = false;
     }
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:petits_app/app/model/animal.dart';
+import 'package:petits_app/app/providers/animal_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_list_tile.dart';
+import 'package:petits_app/core/widgets/scrollable_list.dart';
+import 'package:provider/provider.dart';
 
 class AnimalsList extends StatelessWidget {
 
@@ -10,10 +13,15 @@ class AnimalsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return InfiniteScrollableList(
       itemCount: _animals.length,
       itemBuilder: (_, i){
         return _buildListItem(i);
+      },
+      onBottomReached: () async{
+        print(Provider.of<AnimalProvider>(context).limit);
+        Provider.of<AnimalProvider>(context).limit = 20;
+        await Provider.of<AnimalProvider>(context).fetchLastAnimals();
       },
     );
   }

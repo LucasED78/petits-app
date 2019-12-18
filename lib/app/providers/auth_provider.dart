@@ -61,7 +61,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<bool> tryAutoLogin() async{
     final prefs = await SharedPreferences.getInstance();
-    
+
     if(!prefs.containsKey("authData")) return false;
 
     final Map<String, dynamic> authData = await jsonDecode(prefs.getString("authData"));

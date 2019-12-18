@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:petits_app/app/model/animal.dart';
 import 'package:petits_app/app/providers/animal_provider.dart';
 import 'package:petits_app/app/providers/favorites_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
@@ -31,7 +30,6 @@ class _AnimalsScreenState extends State<AnimalsScreen> {
   @override
   Widget build(BuildContext context) {
     AnimalProvider _animalsProvider = Provider.of<AnimalProvider>(context);
-    print(_animalsProvider.animalsCount);
     return PetitsScaffold(
       body: RefreshIndicator(
         child: AnimalsList(_animalsProvider.animals),

@@ -44,6 +44,10 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => _passwordFocusNode.requestFocus(),
               onSaved: (v) => _user.email = v,
+              validator: (v){
+                if (v.isEmpty) return "please provide a value";
+                return null;
+              },
             ),
             const SizedBox(height: 10,),
             TextFormField(
@@ -60,6 +64,10 @@ class _LoginBodyItemState extends State<LoginBodyItem> {
               ),
               textInputAction: TextInputAction.done,
               onSaved: (v) => _user.password = v,
+              validator: (v){
+                if (v.isEmpty) return "please provide a value";
+                return null;
+              },
             ),
             const SizedBox(height: 20,),
             LoadingButton(

@@ -5,12 +5,18 @@ import 'package:petits_app/app/model/animal.dart';
 class AnimalService {
   PetitsHttp _http = PetitsHttp();
 
-  Future<List<Animal>> getAnimals({int limit = 20, page = 1}) async{
-  await _http.init();
-   Response response = await _http.get(path: "/animals?limit=$limit&page=$page");
+  Future<List<Animal>> getAnimals({int limit = 20, int page = 1, String name = ''}) async{
+    print(name);
+    await _http.init();
 
-   List<Animal> _animals = response.data['animals'].map<Animal>((a) => Animal.fromJSON(a)).toList();
+    String path = "/animals?limit=$limit&page=$page";
 
-   return _animals;
+    if (name.isNotEmpty) path+= "&name=$name";
+
+    Response response = await _http.get(path: path);
+
+    List<Animal> _animals = response.data['animals'].map<Animal>((a) => Animal.fromJSON(a)).toList();
+
+    return _animals;
   }
 }

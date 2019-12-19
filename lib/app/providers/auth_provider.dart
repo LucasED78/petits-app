@@ -10,6 +10,7 @@ class AuthProvider with ChangeNotifier {
   User _user;
   String _token;
   DateTime _tokenExpirationTime;
+  Timer _timer;
 
   get token {
     if (_token != null && tokenExpirationTime != null && tokenExpirationTime.isAfter(DateTime.now())) {
@@ -73,21 +74,21 @@ class AuthProvider with ChangeNotifier {
     return isAuthenticated;
   }
 
-  Timer _autoLogout(){
-    Duration timerMilliseconds = Duration(milliseconds: DateTime.now().difference(_tokenExpirationTime).inMilliseconds.abs());
-
-    return Timer(timerMilliseconds, logout);
+  void _autoLogout(){
+    if (_timer == null) {
+      Duration timerMilliseconds = Duration(milliseconds: DateTime.now().difference(_tokenExpirationTime).inMilliseconds.abs());
+      _timer = Timer(timerMilliseconds, logout);
+    }
   }
 
   void logout() async{
+    _timer.cancel();
     final prefs = await SharedPreferences.getInstance();
 
     prefs.clear();
     _token = null;
     _user = null;
     notifyListeners();
-
-    _autoLogout().cancel();
   }
   
 }

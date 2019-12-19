@@ -20,12 +20,13 @@ dependencies:
   flutter:
     sdk: flutter
   cached_network_image: 2.0.0-rc.1
-  provider: 3.0.0
+  provider: 3.2.0
   intl: ^0.15.3
   dio: ^3.0.7
   flutter_secure_storage: ^3.3.1+1
   flutter_svg: 0.15.0
   shared_preferences: 0.5.6
+  flutter_speed_dial: 1.2.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -65,7 +66,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+fonts:
+ - family:  PetitsIcons
+   fonts:
+    - asset: assets/fonts/PetitsIcons.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

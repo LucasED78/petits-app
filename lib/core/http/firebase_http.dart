@@ -12,4 +12,9 @@ class FirebaseHttp extends HttpApi {
     final String _finalPath = "$_endpoint$path.json?auth=${_user.token}";
     return await getMethod(_finalPath, method, data, options);
   }
+
+  @override
+  get({String path, Options options}) async{
+    return await call(path, HttpMethod.GET);
+  }
 }

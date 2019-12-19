@@ -12,7 +12,6 @@ class Address {
   });
 
   factory Address.fromJSON(dynamic data) {
-    print(data.toString());
     return Address(
       city: data['city'],
       state: data['state'],

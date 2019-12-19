@@ -18,6 +18,8 @@ class AnimalsCard extends StatelessWidget {
 
     return Container(
       width: deviceSize.width * 0.9,
+//      height: deviceSize.height,
+//      alignment: Alignment.center,
       child: Card(
         elevation: 4,
         child: Column(

@@ -3,6 +3,7 @@ import 'package:petits_app/app/providers/animal_provider.dart';
 import 'package:petits_app/app/providers/auth_provider.dart';
 import 'package:petits_app/app/providers/favorites_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
+import 'package:petits_app/app/providers/user_list_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_details_screen.dart';
 import 'package:petits_app/app/widgets/animals/animals_screen.dart';
 import 'package:petits_app/app/widgets/auth/login_screen.dart';
@@ -37,6 +38,9 @@ class PetitsApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: FavoritesProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: UserListProvider(),
         )
       ],
       child: Consumer<AuthProvider>(

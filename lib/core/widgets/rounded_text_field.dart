@@ -19,9 +19,10 @@ class RoundedTextField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         filled: true,
-        fillColor: Theme.of(context).accentColor,
+        fillColor: Theme.of(context).backgroundColor,
         border: border,
-        enabledBorder: border
+        enabledBorder: border,
+        focusedBorder: border
       ),
       validator: validator,
       onSaved: onSaved,

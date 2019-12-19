@@ -29,9 +29,9 @@ class AnimalProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  get animals => _animals;
+  List<Animal> get animals => _animals;
 
-  get animalsCount => _animals.length;
+  int get animalsCount => _animals.length;
 
   set search(String term){
     _search = term;
@@ -42,7 +42,7 @@ class AnimalProvider with ChangeNotifier {
   String get search => _search;
 
   Future<void> fetchAnimals() async {
-    _animals = await AnimalService().getAnimals();
+    _animals = await AnimalService().getAnimals(name: _search);
 
     notifyListeners();
   }

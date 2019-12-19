@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petits_app/app/providers/animal_provider.dart';
+import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/core/widgets/rounded_text_field.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   double _width = 0;
+  bool _expanded = false;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -26,7 +28,8 @@ class _SearchBarState extends State<SearchBar> {
               icon: Icon(Icons.search),
               onPressed: (){
                 setState(() {
-                  _width = _deviceSize.width * 0.8;
+                  _expanded = !_expanded;
+                  _width = _expanded ? _deviceSize.width * 0.8 : 0;
                 });
               },
             ),
@@ -46,7 +49,9 @@ class _SearchBarState extends State<SearchBar> {
                 },
                 onChanged: (v) async{
                   _animalProvider.search = v;
+                  Provider.of<LoadingProvider>(context).loading = true;
                   await _animalProvider.fetchAnimals();
+                  Provider.of<LoadingProvider>(context).loading = false;
                 },
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:petits_app/app/providers/favorites_provider.dart';
 import 'package:petits_app/app/providers/loading_provider.dart';
 import 'package:petits_app/app/widgets/animals/animals_list.dart';
 import 'package:petits_app/core/petits_scaffold.dart';
+import 'package:petits_app/core/widgets/empty_result.dart';
 import 'package:petits_app/core/widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,8 @@ class _AnimalsScreenState extends State<AnimalsScreen> {
         SearchBar()
       ],
       body: RefreshIndicator(
-        child: AnimalsList(_animalsProvider.animals),
+        child: _animalsProvider.animals.isEmpty ? EmptyResult("Sorry, no results at this moment! :(")
+        : AnimalsList(_animalsProvider.animals),
         onRefresh: Provider.of<AnimalProvider>(context).fetchAnimals,
       ),
     );

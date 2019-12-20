@@ -17,7 +17,7 @@ class UserList {
 
   factory UserList.fromJSON(dynamic data){
     return UserList(
-      id: data['i'],
+      id: data['id'],
       owner: User.fromJSON(data['owner']),
       name: data['name'],
       animals: json.decode(data['animals']).cast<int>()

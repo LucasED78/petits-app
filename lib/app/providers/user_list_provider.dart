@@ -10,6 +10,8 @@ class UserListProvider with ChangeNotifier {
 
   int get count => _userLists.length;
 
+  UserList getByID(String id) => _userLists.firstWhere((ul) => ul.id == id);
+
   Future<void> createList(UserList userList) async{
     Response response = await UserListService().createList(userList.toJSON());
 
@@ -27,5 +29,22 @@ class UserListProvider with ChangeNotifier {
     else _userLists = [];
 
     notifyListeners();
+  }
+
+  Future<void> appendToList(String id, int animalId) async{
+    if (id.isNotEmpty) {
+      final UserList userList = getByID(id);
+
+      userList.animals.add(animalId);
+
+      notifyListeners();
+
+      try {
+        await UserListService().addToList(id, userList.toJSON());
+      }catch(e){
+        userList.animals.removeLast();
+        notifyListeners();
+      }
+    }
   }
 }

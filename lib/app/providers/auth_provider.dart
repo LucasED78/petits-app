@@ -65,7 +65,7 @@ class AuthProvider with ChangeNotifier {
 
     if(!prefs.containsKey("authData")) return false;
 
-    final Map<String, dynamic> authData = await jsonDecode(prefs.getString("authData"));
+    final Map<String, dynamic> authData = jsonDecode(prefs.getString("authData"));
     final tokenExp = DateTime.parse(authData['tokenExp']);
     final Map<String, dynamic> userData = json.decode(authData['user']);
 
@@ -75,7 +75,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   void _autoLogout(){
-    if (_timer == null) {
+    if (_timer == null && _token != null) {
       Duration timerMilliseconds = Duration(milliseconds: DateTime.now().difference(_tokenExpirationTime).inMilliseconds.abs());
       _timer = Timer(timerMilliseconds, logout);
     }

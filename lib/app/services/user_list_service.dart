@@ -22,4 +22,8 @@ class UserListService {
 
     return _userList;
   }
+
+  Future addToList(String id, Map<String, dynamic> userListData) async{
+    return await FirebaseHttp().call("/usr${User().id}/lists/$id", HttpMethod.PATCH, data: userListData);
+  }
 }

@@ -18,6 +18,6 @@ class UserListModal extends StatefulWidget {
 class _UserListModalState extends State<UserListModal> {
   @override
   Widget build(BuildContext context) {
-    return widget.create ? UserListForm(animalId: widget.animalId) : UserLists();
+    return widget.create ? UserListForm(animalId: widget.animalId) : UserLists(animalId: widget.animalId);
   }
 }

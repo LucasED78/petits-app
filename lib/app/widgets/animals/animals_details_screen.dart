@@ -26,6 +26,7 @@ class AnimalsDetailsScreen extends StatelessWidget {
         child: AnimalsCard(_animal)
       ),
       speedDial: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_home,
         curve: Curves.bounceIn,
         child: Icon(Icons.menu),
         overlayOpacity: 0,
@@ -36,7 +37,7 @@ class AnimalsDetailsScreen extends StatelessWidget {
                 return Icon(fav.has(id) ? Icons.favorite : Icons.favorite_border);
               },
             ),
-            onTap: () => _favoritesProvider.toggleFavorite(id)
+            onTap: () => _favoritesProvider.toggleFavorite(id),
           ),
           SpeedDialChild(
             child: Icon(Icons.add),

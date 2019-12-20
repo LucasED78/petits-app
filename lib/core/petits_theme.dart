@@ -14,7 +14,7 @@ class PetitsTheme {
           color: Colors.black
         ),
         button: TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.w300
         )
